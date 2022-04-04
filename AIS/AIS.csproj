@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Libs\AIS.LogFactory\AIS.LogFactory.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Hero.Core">
+      <HintPath>..\_Libs\Hero.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.Core.Serializer.TextJson">
+      <HintPath>..\_Libs\Hero.Core.Serializer.TextJson.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+</Project>

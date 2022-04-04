@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIS", "AIS\AIS.csproj", "{740B02F6-B0B7-4B0F-BA4E-B735B0BC4597}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89D3044B-7079-467D-B998-5E67A3B5DFA9}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet.Config = NuGet.Config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{6A128AF2-93F6-49FB-96D6-3BE3A2BA12BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIS.LogFactory", "Libs\AIS.LogFactory\AIS.LogFactory.csproj", "{2FC2B34B-FE9D-4D50-A8CF-E67F533E0092}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIS.Interfaces", "Libs\AIS.Interfaces\AIS.Interfaces.csproj", "{D8D34A4F-2A73-4344-99D3-A224A7F10500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIS.Commons", "Libs\AIS.Commons\AIS.Commons.csproj", "{A6B3C399-B48E-4309-BCA4-F8C3596C7EE0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{740B02F6-B0B7-4B0F-BA4E-B735B0BC4597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740B02F6-B0B7-4B0F-BA4E-B735B0BC4597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740B02F6-B0B7-4B0F-BA4E-B735B0BC4597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740B02F6-B0B7-4B0F-BA4E-B735B0BC4597}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FC2B34B-FE9D-4D50-A8CF-E67F533E0092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FC2B34B-FE9D-4D50-A8CF-E67F533E0092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FC2B34B-FE9D-4D50-A8CF-E67F533E0092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC2B34B-FE9D-4D50-A8CF-E67F533E0092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D34A4F-2A73-4344-99D3-A224A7F10500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D34A4F-2A73-4344-99D3-A224A7F10500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D34A4F-2A73-4344-99D3-A224A7F10500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D34A4F-2A73-4344-99D3-A224A7F10500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6B3C399-B48E-4309-BCA4-F8C3596C7EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6B3C399-B48E-4309-BCA4-F8C3596C7EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6B3C399-B48E-4309-BCA4-F8C3596C7EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B3C399-B48E-4309-BCA4-F8C3596C7EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2FC2B34B-FE9D-4D50-A8CF-E67F533E0092} = {6A128AF2-93F6-49FB-96D6-3BE3A2BA12BF}
+		{D8D34A4F-2A73-4344-99D3-A224A7F10500} = {6A128AF2-93F6-49FB-96D6-3BE3A2BA12BF}
+		{A6B3C399-B48E-4309-BCA4-F8C3596C7EE0} = {6A128AF2-93F6-49FB-96D6-3BE3A2BA12BF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCBDD357-315B-4004-9E45-8B754F652F68}
+	EndGlobalSection
+EndGlobal
