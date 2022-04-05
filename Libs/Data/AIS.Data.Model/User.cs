@@ -2,7 +2,7 @@
 
 namespace AIS.Data.Entity
 {
-    [TableName("td_Tender")]
+    [TableName("td_User")]
     public class User
     {
         [FieldKey]

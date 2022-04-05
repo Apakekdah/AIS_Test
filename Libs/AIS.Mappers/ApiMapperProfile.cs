@@ -19,6 +19,12 @@ namespace AIS.Mappers
                 .ForPath(c => c.Tender.CreatorID, opt => opt.MapFrom(src => src.CreatorID))
             ;
 
+            CreateMap<Model.Models.User, UserCommand>()
+                .ForMember(c => c.UserID, opt => opt.MapFrom(src => src.UserID))
+                .ForMember(c => c.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(c => c.Password, opt => opt.MapFrom(src => src.Password))
+            ;
+
             // Model to Entity
             CreateMap<Model.Models.Tender, Data.Entity.Tender>();
             CreateMap<Model.Models.User, Data.Entity.User>();

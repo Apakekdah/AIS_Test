@@ -30,6 +30,10 @@ namespace AIS.API.Handlers
             container.Register(c => TenderCmd.Read.Handler.CreateBuilder()
                 .WithLife(c).Build().CreateInvoker(c), ScopeIoC.Singleton);
 
+            /// ############## User ##############
+            container.Register(c => UserCmd.CUD.Handler.CreateBuilder()
+                .WithLife(c).Build().CreateInvoker(c), ScopeIoC.Singleton);
+
             return Task.FromResult(0);
         }
 

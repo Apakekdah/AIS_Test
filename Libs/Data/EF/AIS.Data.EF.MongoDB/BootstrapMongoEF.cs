@@ -33,6 +33,7 @@ namespace AIS.Data.EF.MongoDB
             // Register repository
             container
                 .RegisterAsImplement<RepositoryBase<Tender>>(ScopeIoC.Lifetime)
+                .RegisterAsImplement<RepositoryBase<User>>(ScopeIoC.Lifetime)
                 ;
 
             container.RegisterGeneric(typeof(MongoTable<>), typeof(IMongoTable<>));
