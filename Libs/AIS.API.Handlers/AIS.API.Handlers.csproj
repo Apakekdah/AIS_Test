@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.19" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.19" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AIS.Commands\AIS.Commands.csproj" />
+    <ProjectReference Include="..\AIS.Model\AIS.Model.csproj" />
+    <ProjectReference Include="..\Data\AIS.Data.Business\AIS.Data.Business.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Hero.Business">
+      <HintPath>..\..\_Libs\Hero.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.Core">
+      <HintPath>..\..\_Libs\Hero.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.IoC">
+      <HintPath>..\..\_Libs\Hero.IoC.dll</HintPath>
+    </Reference>
+    <Reference Include="Ride.Commons">
+      <HintPath>..\..\_Libs\Ride.Commons.dll</HintPath>
+    </Reference>
+    <Reference Include="Ride.Handlers">
+      <HintPath>..\..\_Libs\Ride.Handlers.dll</HintPath>
+    </Reference>
+    <Reference Include="Ride.Interfaces">
+      <HintPath>..\..\_Libs\Ride.Interfaces.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

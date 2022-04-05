@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AIS.Commands\AIS.Commands.csproj" />
+    <ProjectReference Include="..\AIS.MapperRegistration\AIS.MapperRegistration.csproj" />
+    <ProjectReference Include="..\AIS.Model\AIS.Model.csproj" />
+    <ProjectReference Include="..\Data\AIS.Data.Model\AIS.Data.Entity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Hero.Core">
+      <HintPath>..\..\_Libs\Hero.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.IoC">
+      <HintPath>..\..\_Libs\Hero.IoC.dll</HintPath>
+    </Reference>
+    <Reference Include="Ride.Interfaces">
+      <HintPath>..\..\_Libs\Ride.Interfaces.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -8,7 +8,7 @@ using System.IO;
 using System.Runtime.ExceptionServices;
 using System.Text;
 
-namespace AIS
+namespace AIS.API
 {
     public class Program
     {

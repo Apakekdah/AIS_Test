@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AIS.Data.Model\AIS.Data.Model.csproj" />
+    <ProjectReference Include="..\AIS.Data.Model\AIS.Data.Entity.csproj" />
   </ItemGroup>
 
   <ItemGroup>

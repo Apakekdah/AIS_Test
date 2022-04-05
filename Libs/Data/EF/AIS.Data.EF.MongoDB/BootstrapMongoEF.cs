@@ -1,6 +1,6 @@
 ﻿using AIS.Data.EF.MongoDB.Contexts;
 using AIS.Data.EF.MongoDB.Interfaces;
-using AIS.Data.Model;
+using AIS.Data.Entity;
 using Hero.Core.Interfaces;
 using Hero.IoC;
 using MongoDB.Bson.Serialization.Conventions;

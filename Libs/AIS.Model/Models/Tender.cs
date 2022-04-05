@@ -1,21 +1,25 @@
-﻿using Ride.Attributes.DB;
+﻿using Ride.Attributes.Validator;
 using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace AIS.Data.Entity
+namespace AIS.Model.Models
 {
-    [TableName("td_Tender")]
     public class Tender
     {
-
-        [FieldKey]
+        [Required]
         public string ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string ReferenceNumber { get; set; }
+        [Required]
+        [DateValidator(-1)]
         public DateTime ReleaseDate { get; set; }
+        [Required]
         public DateTime ClosingDate { get; set; }
+        [Required]
         public string Details { get; set; }
-
-        [FieldIndex("idx_tender_cid")]
+        [Required]
         public string CreatorID { get; set; }
     }
 }

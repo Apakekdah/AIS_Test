@@ -34,6 +34,8 @@ namespace AIS
                     // Api registration
                     typeof(Data.Business.BootstrapBusiness).Assembly,
                     typeof(Data.EF.MongoDB.BootstrapMongoEF).Assembly,
+                    typeof(Mappers.BootstrapMapper).Assembly,
+                    typeof(API.Handlers.BootstrapApiHandlers).Assembly,
                 };
 
             builder.RegisterAllBootstrapLoaderBuilder(registerAsms);

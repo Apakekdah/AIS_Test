@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 
-namespace AIS
+namespace AIS.API
 {
     public class Startup
     {
@@ -88,6 +88,18 @@ namespace AIS
             });
 
             app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            //var defaults = new DefaultFilesOptions().DefaultFileNames.Select(p => "/" + p);
+            //app.Use(async (context, next) =>
+            //{
+            //    var path = context.Request.Path;
+            //    if ((path == "/") || defaults.Any(p => p.Equals(path, System.StringComparison.InvariantCultureIgnoreCase)))
+            //    {
+            //        context.Response.Redirect("/Home");
+            //        return;
+            //    }
+            //    await next();
+            //});
         }
 
         public void ConfigureContainer(IBuilderIoC builder)

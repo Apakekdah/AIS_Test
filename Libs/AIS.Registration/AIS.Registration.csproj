@@ -10,6 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AIS.API.Handlers\AIS.API.Handlers.csproj" />
+    <ProjectReference Include="..\AIS.Mappers\AIS.Mappers.csproj" />
     <ProjectReference Include="..\Data\AIS.Data.Business\AIS.Data.Business.csproj" />
     <ProjectReference Include="..\Data\EF\AIS.Data.EF.MongoDB\AIS.Data.EF.MongoDB.csproj" />
   </ItemGroup>

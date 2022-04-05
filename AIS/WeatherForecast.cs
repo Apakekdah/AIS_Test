@@ -1,6 +1,6 @@
 using System;
 
-namespace AIS
+namespace AIS.API
 {
     public class WeatherForecast
     {
