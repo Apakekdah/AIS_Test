@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Libs\AIS.Commons\AIS.Commons.csproj" />
     <ProjectReference Include="..\Libs\AIS.LogFactory\AIS.LogFactory.csproj" />
+    <ProjectReference Include="..\Libs\AIS.Registration\AIS.Registration.csproj" />
   </ItemGroup>
 
   <ItemGroup>

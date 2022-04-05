@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.23" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Hero.Core">
+      <HintPath>..\..\_Libs\Hero.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.IoC">
+      <HintPath>..\..\_Libs\Hero.IoC.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.IoC.Autofac">
+      <HintPath>..\..\_Libs\Hero.IoC.Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.IoC.Autofac.DI">
+      <HintPath>..\..\_Libs\Hero.IoC.Autofac.DI.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.IoC.Autofac.LoggerModule">
+      <HintPath>..\..\_Libs\Hero.IoC.Autofac.LoggerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.IoC.Autofac.Modular">
+      <HintPath>..\..\_Libs\Hero.IoC.Autofac.Modular.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.Logger">
+      <HintPath>..\..\_Libs\Hero.Logger.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

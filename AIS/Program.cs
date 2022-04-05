@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Runtime.ExceptionServices;
 using System.Text;
 
@@ -59,11 +62,36 @@ namespace AIS
         }
 
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true)
+                .AddEnvironmentVariables("AIS_")
+                .AddCommandLine(args)
+                .Build();
+
+            var timeLength = config.GetAs("requestTimeout", 120);
+            var time = TimeSpan.FromSeconds(timeLength);
+
+            return Host.CreateDefaultBuilder(args)
+                .UseAISServiceProviderFactory()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                    webBuilder.UseConfiguration(config);
+                    webBuilder.ConfigureKestrel(opt =>
+                    {
+                        opt.DisableStringReuse = true;
+                        opt.Limits.KeepAliveTimeout = time;
+                    });
+                })
+                .ConfigureLogging(logger =>
+                {
+                    logger.ClearProviders();
+                    logger.SetMinimumLevel(LogLevel.Trace);
+                })
+                .UseAISLog();
+        }
     }
 }
