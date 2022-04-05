@@ -1,6 +1,6 @@
-﻿using Hero;
+﻿using AIS.Data.EF.MongoDB.Models;
+using Hero;
 using Ride.Attributes.DB;
-using AIS.Data.EF.MongoDB.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

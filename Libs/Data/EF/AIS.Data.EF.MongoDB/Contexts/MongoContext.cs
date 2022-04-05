@@ -1,5 +1,6 @@
 ﻿//#define USING_LAMBDA
 
+using AIS.Data.EF.MongoDB.Interfaces;
 using Hero;
 using Hero.Core.Commons;
 using Hero.IoC;
@@ -8,7 +9,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using AIS.Data.EF.MongoDB.Interfaces;
+using Ride;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

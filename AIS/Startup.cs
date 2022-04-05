@@ -1,30 +1,49 @@
+using AIS.Registration.MW;
+using Hero.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AIS
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment appEnv)
         {
             Configuration = configuration;
+            Environment = appEnv;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllersWithViews()
+                  .AddJsonOptions(opt =>
+                  {
+                      opt.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+                      opt.JsonSerializerOptions.DictionaryKeyPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+                      opt.JsonSerializerOptions.IgnoreNullValues = true;
+                      opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                      opt.JsonSerializerOptions.Converters.Add(Hero.Core.Serializer.TextJson.Converter.DateTimeJsonConverter.Create());
+                      opt.JsonSerializerOptions.Converters.Add(Hero.Core.Serializer.TextJson.Converter.DateTimeNullJsonConverter.Create());
+                      opt.JsonSerializerOptions.Converters.Add(Hero.Core.Serializer.TextJson.Converter.TimeSpanJsonConverter.Create());
+                      opt.JsonSerializerOptions.Converters.Add(Hero.Core.Serializer.TextJson.Converter.TimeSpanNullJsonConverter.Create());
+                      opt.JsonSerializerOptions.Converters.Add(Hero.Core.Serializer.TextJson.Converter.ExceptionConverter.Create());
+                      opt.JsonSerializerOptions.Converters.Add(Hero.Core.Serializer.TextJson.Converter.DictionaryObjectConverter.Create());
+                      opt.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+                  });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "AIS API", Version = "v1" });
+                c.ResolveConflictingActions(x => x.First());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,12 +56,50 @@ namespace AIS
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
+
+            app.UseStaticFiles();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "ais-sdk";
+                string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "AIS API v1");
+            });
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "api_default",
+                    pattern: "api/{controller=WeatherForecast}/{action=Get}/{id?}");
             });
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+        }
+
+        public void ConfigureContainer(IBuilderIoC builder)
+        {
+            if (Environment.IsDevelopment())
+            {
+                builder.RegisteringAISServicesDevelopment(Configuration);
+            }
+            else
+            {
+                builder.RegisteringAISServicesProduction(Configuration);
+            }
         }
     }
 }

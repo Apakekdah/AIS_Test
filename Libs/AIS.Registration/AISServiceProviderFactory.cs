@@ -14,26 +14,29 @@ namespace AIS
             return host.UseServiceProviderFactory(new IoCServiceProviderFactory());
         }
 
-        public static void RegisteringHeroServices(this IBuilderIoC builder, IConfiguration configuration)
+        public static void RegisteringAISServicesDevelopment(this IBuilderIoC builder, IConfiguration configuration)
+        {
+            RegisteringAISServices(builder, configuration);
+        }
+
+        public static void RegisteringAISServicesProduction(this IBuilderIoC builder, IConfiguration configuration)
+        {
+            RegisteringAISServices(builder, configuration);
+        }
+
+        static void RegisteringAISServices(this IBuilderIoC builder, IConfiguration configuration)
         {
             builder.RegisterModule<LogModule>();
 
             builder.RegisterLog<NLogIt>();
 
-            //var registerAsms = new[] {
-            //        // Api registration
-            //        typeof(Business.BootstrapBusiness).Assembly,
-            //        typeof(MongoDBEF.BootstrapMongoEF).Assembly,
-            //        typeof(Mappers.BootstrapMapper).Assembly,
-            //        typeof(API.Handlers.BootstrapApiHandlers).Assembly,
-            //        typeof(Rule.BootstrapRules).Assembly,
-            //        //// Broker
-            //        typeof(SimpleMsgBroker.BootstrapMessageBroker).Assembly,
-            //        //typeof(RabbitMQMsgBroker.BootstrapMessageBroker).Assembly
-            //        //typeof(MT_ASB.BootstrapMessageBroker).Assembly
-            //    };
+            var registerAsms = new[] {
+                    // Api registration
+                    typeof(Data.Business.BootstrapBusiness).Assembly,
+                    typeof(Data.EF.MongoDB.BootstrapMongoEF).Assembly,
+                };
 
-            //builder.RegisterAllBootstrapLoaderBuilder(registerAsms);
+            builder.RegisterAllBootstrapLoaderBuilder(registerAsms);
         }
     }
 }

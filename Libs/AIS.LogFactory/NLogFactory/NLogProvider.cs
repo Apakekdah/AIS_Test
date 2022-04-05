@@ -1,8 +1,8 @@
-﻿using AIS.Interfaces.Components;
-using Hero;
+﻿using Hero;
 using Hero.IoC;
 using Microsoft.Extensions.Hosting;
 using NLog.Web;
+using Ride.Interfaces;
 using System;
 
 namespace AIS.LogFactory.NLogFactory

@@ -1,4 +1,4 @@
-﻿using AIS.Attributes.DB;
+﻿using Ride.Attributes.DB;
 using System;
 
 namespace AIS.Data.Model

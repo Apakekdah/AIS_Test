@@ -1,7 +1,7 @@
-﻿using AIS.Interfaces.Components;
-using AIS.LogFactory.NLogFactory;
+﻿using AIS.LogFactory.NLogFactory;
 using Hero.Core.Interfaces;
 using Microsoft.Extensions.Hosting;
+using Ride.Interfaces;
 using System;
 
 namespace AIS

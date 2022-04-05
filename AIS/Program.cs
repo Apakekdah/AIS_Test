@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Ride;
 using System;
 using System.IO;
 using System.Runtime.ExceptionServices;
@@ -19,6 +20,8 @@ namespace AIS
             Hero.HeroSerializer.SetBinarySerializer(Hero.Core.Serializer.TextJson.TJBinary.Create());
 
             AISLogFactory.InitLog("nlog.config");
+
+            Log = AISLogFactory.GetLogger<Program>();
 
             CreateHostBuilder(args).Build().Run();
         }

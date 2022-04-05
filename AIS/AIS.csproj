@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Libs\AIS.Commons\AIS.Commons.csproj" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Libs\AIS.LogFactory\AIS.LogFactory.csproj" />
     <ProjectReference Include="..\Libs\AIS.Registration\AIS.Registration.csproj" />
   </ItemGroup>
@@ -16,6 +20,12 @@
     </Reference>
     <Reference Include="Hero.Core.Serializer.TextJson">
       <HintPath>..\_Libs\Hero.Core.Serializer.TextJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Hero.IoC">
+      <HintPath>..\_Libs\Hero.IoC.dll</HintPath>
+    </Reference>
+    <Reference Include="Ride.Commons">
+      <HintPath>..\_Libs\Ride.Commons.dll</HintPath>
     </Reference>
   </ItemGroup>
 
