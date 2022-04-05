@@ -4,8 +4,6 @@ namespace AIS.Commands.API
 {
     public class TenderCommandCUD : BaseCommand
     {
-        public CommandProcessor CommandProcessor { get; set; }
-
         public Tender Tender { get; set; }
 
         public string ID { get; set; }
@@ -13,8 +11,6 @@ namespace AIS.Commands.API
 
     public class TenderCommandRA : BaseCommand
     {
-        public CommandProcessor CommandProcessor { get; set; }
-
         public string ID { get; set; }
     }
 }

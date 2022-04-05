@@ -39,7 +39,6 @@ namespace AIS.API.Handlers.TenderCmd.CUD
                 var bll = scope.GetInstance<Tenders>();
 
                 Tender tender;
-                bool isMarkAdd = false;
 
                 switch (command.CommandProcessor)
                 {
@@ -48,7 +47,6 @@ namespace AIS.API.Handlers.TenderCmd.CUD
                         {
                             ID = Guid.NewGuid().ToString()
                         };
-                        isMarkAdd = true;
                         break;
                     case Commands.CommandProcessor.Delete:
                     case Commands.CommandProcessor.Edit:
@@ -70,10 +68,18 @@ namespace AIS.API.Handlers.TenderCmd.CUD
                 tender.Details = command.Tender.Details;
                 tender.CreatorID = command.Tender.CreatorID;
 
-                if (isMarkAdd)
-                    await bll.Add(tender);
-                else
-                    await bll.Update(tender);
+                switch (command.CommandProcessor)
+                {
+                    case Commands.CommandProcessor.Add:
+                        await bll.Add(tender);
+                        break;
+                    case Commands.CommandProcessor.Delete:
+                        await bll.Delete(tender);
+                        break;
+                    default:
+                        await bll.Update(tender);
+                        break;
+                }
 
                 var changes = await bll.Commit();
 

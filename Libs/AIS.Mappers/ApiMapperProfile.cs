@@ -21,6 +21,11 @@ namespace AIS.Mappers
 
             // Model to Entity
             CreateMap<Model.Models.Tender, Data.Entity.Tender>();
+            CreateMap<Model.Models.User, Data.Entity.User>();
+
+            // Reverse Entity to Model
+            CreateMap<Data.Entity.Tender, Model.Models.Tender>();
+            CreateMap<Data.Entity.User, Model.Models.User>();
         }
     }
 }

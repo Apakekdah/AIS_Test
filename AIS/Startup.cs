@@ -49,6 +49,8 @@ namespace AIS.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -86,8 +88,6 @@ namespace AIS.API
                     name: "api_default",
                     pattern: "api/{controller=WeatherForecast}/{action=Get}/{id?}");
             });
-
-            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             //var defaults = new DefaultFilesOptions().DefaultFileNames.Select(p => "/" + p);
             //app.Use(async (context, next) =>

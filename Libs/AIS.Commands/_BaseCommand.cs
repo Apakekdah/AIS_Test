@@ -73,6 +73,8 @@ namespace AIS.Commands
             }
         }
 
+        public CommandProcessor CommandProcessor { get; set; }
+
         public virtual object Clone()
         {
             return MemberwiseClone();

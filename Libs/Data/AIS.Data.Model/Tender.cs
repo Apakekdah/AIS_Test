@@ -6,7 +6,6 @@ namespace AIS.Data.Entity
     [TableName("td_Tender")]
     public class Tender
     {
-
         [FieldKey]
         public string ID { get; set; }
         public string Name { get; set; }
