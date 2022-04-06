@@ -15,5 +15,15 @@ namespace AIS.Data.Business.Repositories
         {
             return Get(c => c.UserID == id && c.IsActive);
         }
+
+        public async Task<bool> IsUserOk(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return false;
+            }
+
+            return await Exists(c => c.UserID == id && c.IsActive);
+        }
     }
 }

@@ -2,7 +2,7 @@
 using Ride.Handlers.Handlers;
 using System;
 
-namespace AIS.API.Handlers.TenderCmd.CUD
+namespace AIS.API.Handlers.TenderCmd.D
 {
     public partial class Handler
     {
@@ -26,7 +26,7 @@ namespace AIS.API.Handlers.TenderCmd.CUD
 
             protected override string DefaultName => name;
 
-            public override CommandHandlerBase<TenderCommandCUD, bool> Build()
+            public override CommandHandlerBase<TenderCommandD, bool> Build()
             {
                 return factory(GetConfig());
             }

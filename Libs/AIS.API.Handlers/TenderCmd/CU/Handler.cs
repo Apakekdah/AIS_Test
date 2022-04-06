@@ -4,38 +4,54 @@ using AIS.Data.Entity;
 using Hero;
 using Hero.IoC;
 using Ride.Handlers.Handlers;
-using Ride.Interfaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AIS.API.Handlers.TenderCmd.CUD
+namespace AIS.API.Handlers.TenderCmd.CU
 {
-    public partial class Handler : CommandHandlerBase<TenderCommandCUD, bool>
+    public partial class Handler : CommandHandlerBase<TenderCommandCU, bool>
     {
         private readonly IDisposableIoC life;
-        private readonly IMappingObject map;
+        private string activeUser;
 
         public Handler(Config config) :
             base(config)
         {
             life = config.Life;
-            map = life.GetInstance<IMappingObject>();
         }
 
-        public override Task<bool> Validate(TenderCommandCUD command)
+        public override Task<bool> Validate(TenderCommandCU command)
         {
-            if (command.Tender.IsNull())
+            activeUser = User.GetActiveUser();
+            if (activeUser.IsNullOrEmptyOrWhitespace())
             {
-                throw new NullReferenceException("Tender object is not created");
+                throw new NullReferenceException("Can't found active user in session");
+            }
+            if (command.CommandProcessor == Commands.CommandProcessor.Edit)
+            {
+                if (command.ID.IsNullOrEmptyOrWhitespace())
+                {
+                    throw new NullReferenceException("Tender ID is required");
+                }
             }
             return Task.FromResult(true);
         }
 
-        public override async Task<bool> Execute(TenderCommandCUD command, CancellationToken cancellation)
+        public override async Task<bool> Execute(TenderCommandCU command, CancellationToken cancellation)
         {
+            // Simple to show log
+            Log.Debug($"User executed : {activeUser}");
+
             using (var scope = life.New)
             {
+                var bllUser = scope.GetInstance<Users>();
+
+                if (!await bllUser.IsUserOk(activeUser))
+                {
+                    throw new Exception("Active user is not valid");
+                }
+
                 var bll = scope.GetInstance<Tenders>();
 
                 Tender tender;
@@ -48,7 +64,6 @@ namespace AIS.API.Handlers.TenderCmd.CUD
                             ID = Guid.NewGuid().ToString()
                         };
                         break;
-                    case Commands.CommandProcessor.Delete:
                     case Commands.CommandProcessor.Edit:
                         tender = await bll.GetByTenderID(command.ID);
                         break;
@@ -58,23 +73,20 @@ namespace AIS.API.Handlers.TenderCmd.CUD
 
                 if (tender.IsNull())
                 {
-                    throw new Exception($"Failed to read data for '{command.CommandProcessor}' with Id '{command.Tender.ID}'");
+                    throw new Exception($"Failed to read data for '{command.CommandProcessor}' with Id '{command.ID}'");
                 }
 
-                tender.Name = command.Tender.Name;
-                tender.ReferenceNumber = command.Tender.ReferenceNumber;
-                tender.ReleaseDate = command.Tender.ReleaseDate;
-                tender.ClosingDate = command.Tender.ClosingDate;
-                tender.Details = command.Tender.Details;
-                tender.CreatorID = command.Tender.CreatorID;
+                tender.Name = command.Name;
+                tender.ReferenceNumber = command.ReferenceNumber;
+                tender.ReleaseDate = command.ReleaseDate;
+                tender.ClosingDate = command.ClosingDate;
+                tender.Details = command.Details;
+                tender.CreatorID = activeUser;
 
                 switch (command.CommandProcessor)
                 {
                     case Commands.CommandProcessor.Add:
                         await bll.Add(tender);
-                        break;
-                    case Commands.CommandProcessor.Delete:
-                        await bll.Delete(tender);
                         break;
                     default:
                         await bll.Update(tender);

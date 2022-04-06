@@ -2,7 +2,10 @@
 using Hero.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Ride;
+using System.Linq;
 using System.Net;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace AIS
 {
@@ -21,6 +24,12 @@ namespace AIS
                 ContentType = "application/json",
                 StatusCode = HttpStatusCode.OK.GetHashCode()
             };
+        }
+
+        public static string GetActiveUser(this IPrincipal principal)
+        {
+            var claim = ((ClaimsIdentity)principal.Identity)?.Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.Name));
+            return claim?.Value;
         }
     }
 }

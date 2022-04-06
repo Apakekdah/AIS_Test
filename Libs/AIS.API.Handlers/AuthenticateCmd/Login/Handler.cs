@@ -4,7 +4,6 @@ using AIS.Interface;
 using Hero;
 using Hero.IoC;
 using Ride.Handlers.Handlers;
-using Ride.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -15,14 +14,14 @@ namespace AIS.API.Handlers.AuthenticateCmd.Login
     public partial class Handler : CommandHandlerBase<AuthenticateCommand, Model.Models.AuthenticateResponse>
     {
         private readonly IDisposableIoC life;
-        private readonly IMappingObject map;
+        private readonly int maxFailed;
         private readonly IUserLogin login;
 
-        public Handler(Config config) :
+        public Handler(HandlerConfig config) :
             base(config)
         {
             life = config.Life;
-            map = life.GetInstance<IMappingObject>();
+            maxFailed = config.MaxFailed;
             login = life.GetInstance<IUserLogin>();
         }
 
@@ -38,6 +37,35 @@ namespace AIS.API.Handlers.AuthenticateCmd.Login
                     throw new Exception($"User '{command.User}'");
                 else if (!userEntity.IsActive)
                     throw new Exception($"User '{command.User}' not active");
+                else if (!command.Password.Equals(userEntity.Password))
+                {
+                    if (userEntity.Counter > maxFailed)
+                    {
+                        throw new Exception($"User '{command.User}' is blocked");
+                    }
+
+                    try
+                    {
+                        userEntity.Counter++;
+
+                        await bll.Update(userEntity);
+
+                        await bll.Commit();
+                    }
+                    catch { }
+
+                    throw new Exception($"User '{command.User}' invalid password");
+                }
+
+                try
+                {
+                    userEntity.Counter = 0;
+
+                    await bll.Update(userEntity);
+
+                    await bll.Commit();
+                }
+                catch { }
 
                 return login.Login(new Model.Models.AuthenticateUser
                 {

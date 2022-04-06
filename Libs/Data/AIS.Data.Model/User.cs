@@ -10,5 +10,6 @@ namespace AIS.Data.Entity
         public string Name { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
+        public int Counter { get; set; }
     }
 }

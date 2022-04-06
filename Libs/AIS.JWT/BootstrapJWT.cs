@@ -43,10 +43,10 @@ namespace AIS.Mappers
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidIssuer = "localhost",
-                    ValidAudience = "localhost",
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidIssuer = jwtCfg.Issuer,
+                    ValidAudience = jwtCfg.Audience,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                 };

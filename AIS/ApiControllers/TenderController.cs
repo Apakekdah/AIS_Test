@@ -2,6 +2,7 @@
 using AIS.Model.Models;
 using Hero.Core.Interfaces;
 using Hero.IoC;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ride.Interfaces;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace AIS.API.ApiControllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public partial class TenderController
     {
         private readonly IDisposableIoC life;
@@ -26,8 +28,8 @@ namespace AIS.API.ApiControllers
         [HttpPost]
         public async Task<IActionResult> PostTender(Tender model, CancellationToken cancellation)
         {
-            var invoker = life.GetInstance<ICommandInvoker<TenderCommandCUD, bool>>();
-            using (var cmd = map.Get<TenderCommandCUD>(model, (src, dest) => dest.CommandProcessor = Commands.CommandProcessor.Add))
+            var invoker = life.GetInstance<ICommandInvoker<TenderCommandCU, bool>>();
+            using (var cmd = map.Get<TenderCommandCU>(model, (src, dest) => dest.CommandProcessor = Commands.CommandProcessor.Add))
             {
                 return (await invoker.Invoke(cmd, cancellation)).ToContentJson();
             }
@@ -36,8 +38,8 @@ namespace AIS.API.ApiControllers
         [HttpPut]
         public async Task<IActionResult> UpdateTender(Tender model, CancellationToken cancellation)
         {
-            var invoker = life.GetInstance<ICommandInvoker<TenderCommandCUD, bool>>();
-            using (var cmd = map.Get<TenderCommandCUD>(model, (src, dest) => dest.CommandProcessor = Commands.CommandProcessor.Add))
+            var invoker = life.GetInstance<ICommandInvoker<TenderCommandCU, bool>>();
+            using (var cmd = map.Get<TenderCommandCU>(model, (src, dest) => dest.CommandProcessor = Commands.CommandProcessor.Add))
             {
                 return (await invoker.Invoke(cmd, cancellation)).ToContentJson();
             }
@@ -46,8 +48,8 @@ namespace AIS.API.ApiControllers
         [HttpDelete]
         public async Task<IActionResult> DeleteTender(string id, CancellationToken cancellation)
         {
-            var invoker = life.GetInstance<ICommandInvoker<TenderCommandCUD, bool>>();
-            using (var cmd = new TenderCommandCUD { CommandProcessor = Commands.CommandProcessor.Delete, ID = id })
+            var invoker = life.GetInstance<ICommandInvoker<TenderCommandD, bool>>();
+            using (var cmd = new TenderCommandD { ID = id })
             {
                 return (await invoker.Invoke(cmd, cancellation)).ToContentJson();
             }
@@ -56,7 +58,7 @@ namespace AIS.API.ApiControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTender(string id, CancellationToken cancellation)
         {
-            var invoker = life.GetInstance<ICommandInvoker<TenderCommandRA, bool>>();
+            var invoker = life.GetInstance<ICommandInvoker<TenderCommandRA, IEnumerable<Tender>>>();
             using (var cmd = new TenderCommandRA { CommandProcessor = Commands.CommandProcessor.GetOne, ID = id })
             {
                 return (await invoker.Invoke(cmd, cancellation)).ToContentJson();

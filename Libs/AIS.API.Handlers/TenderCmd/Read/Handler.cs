@@ -24,6 +24,16 @@ namespace AIS.API.Handlers.TenderCmd.Read
             map = life.GetInstance<IMappingObject>();
         }
 
+        public override Task<bool> Validate(TenderCommandRA command)
+        {
+            var user = User.GetActiveUser();
+            if (user.IsNullOrEmptyOrWhitespace())
+            {
+                throw new NullReferenceException("Can't found active user in session");
+            }
+            return Task.FromResult(true);
+        }
+
         public override async Task<IEnumerable<Model.Models.Tender>> Execute(TenderCommandRA command, CancellationToken cancellation)
         {
             using (var scope = life.New)

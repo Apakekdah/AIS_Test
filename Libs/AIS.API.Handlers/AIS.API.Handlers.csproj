@@ -9,10 +9,12 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.19" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.19" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.19" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.19" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AIS.Commands\AIS.Commands.csproj" />
+    <ProjectReference Include="..\AIS.Commons\AIS.Commons.csproj" />
     <ProjectReference Include="..\AIS.Interface\AIS.Interface.csproj" />
     <ProjectReference Include="..\AIS.Model\AIS.Model.csproj" />
     <ProjectReference Include="..\Data\AIS.Data.Business\AIS.Data.Business.csproj" />

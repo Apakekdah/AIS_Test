@@ -1,6 +1,11 @@
-﻿using Hero.IoC;
+﻿using AIS.Commands.API;
+using AIS.Model.Models;
+using Hero.Core.Interfaces;
+using Hero.IoC;
 using Microsoft.AspNetCore.Mvc;
 using Ride.Interfaces;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AIS.API.ApiControllers
 {
@@ -17,14 +22,15 @@ namespace AIS.API.ApiControllers
             map = life.GetInstance<IMappingObject>();
         }
 
-        //public async Task<IActionResult> Login(AuthenticateUser model, CancellationToken cancellation)
-        //{
-        //    var invoker = Life.GetInstance<ICommandInvoker<UserCommand, User>>();
-        //    using (var cmd = Map.Get<UserCommand>(model, (src, dest) => dest.CommandProcessor = Commands.CommandProcessor.Add))
-        //    {
-        //        return (await invoker.Invoke(cmd, cancellation)).ToContentJson();
-        //    }
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Login(AuthenticateUser model, CancellationToken cancellation)
+        {
+            var invoker = life.GetInstance<ICommandInvoker<AuthenticateCommand, AuthenticateResponse>>();
+            using (var cmd = map.Get<AuthenticateCommand>(model))
+            {
+                return (await invoker.Invoke(cmd, cancellation)).ToContentJson();
+            }
+        }
 
         //[HttpDelete("{userId}")]
         //public async Task<IActionResult> DeleteUser(string userId, CancellationToken cancellation)

@@ -38,8 +38,9 @@ namespace AIS.JWT
             return new AuthenticateResponse
             {
                 User = authenticate.User,
-                Create = DateTime.UtcNow,
-                Session = tokenHandler.WriteToken(token)
+                CreateAt = DateTime.UtcNow,
+                ExpiredAt = tokenDescriptor.Expires,
+                Token = tokenHandler.WriteToken(token)
             };
         }
 

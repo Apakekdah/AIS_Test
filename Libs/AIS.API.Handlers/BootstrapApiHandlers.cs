@@ -25,7 +25,9 @@ namespace AIS.API.Handlers
             }, typeof(BootstrapApiHandlers).Assembly);
 
             /// ############## Tender ##############
-            container.Register(c => TenderCmd.CUD.Handler.CreateBuilder()
+            container.Register(c => TenderCmd.CU.Handler.CreateBuilder()
+                .WithLife(c).Build().CreateInvoker(c), ScopeIoC.Singleton);
+            container.Register(c => TenderCmd.D.Handler.CreateBuilder()
                 .WithLife(c).Build().CreateInvoker(c), ScopeIoC.Singleton);
             container.Register(c => TenderCmd.Read.Handler.CreateBuilder()
                 .WithLife(c).Build().CreateInvoker(c), ScopeIoC.Singleton);
@@ -33,6 +35,10 @@ namespace AIS.API.Handlers
             /// ############## User ##############
             container.Register(c => UserCmd.CUD.Handler.CreateBuilder()
                 .WithLife(c).Build().CreateInvoker(c), ScopeIoC.Singleton);
+
+            /// ############## Authorization ##############
+            container.Register(c => AuthenticateCmd.Login.Handler.CreateBuilder()
+                .WithMaxFailedLogin(3).WithLife(c).Build().CreateInvoker(c), ScopeIoC.Singleton);
 
             return Task.FromResult(0);
         }

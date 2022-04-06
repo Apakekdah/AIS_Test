@@ -6,5 +6,7 @@
 
         public string Key { get; set; }
         public int ExpiredMinutes { get; set; } = 240;
+        public string Issuer { get; set; }
+        public string Audience { get; set; }
     }
 }
