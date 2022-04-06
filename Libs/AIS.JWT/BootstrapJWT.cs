@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AIS.Mappers
 {
-    public class BootstrapMapper : IBootstrapLoader<IBuilderIoC>
+    public class BootstrapJWT : IBootstrapLoader<IBuilderIoC>
     {
         public Task Run(IBuilderIoC container)
         {
@@ -52,7 +52,7 @@ namespace AIS.Mappers
                 };
             });
 
-            var builderD = (IBuilderIoCDI)builder;
+            var builderD = (IBuilderIoCDI)container;
 
             builderD.Populate(service);
 

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Ride;
 using System.Net;
 
-namespace AIS.API
+namespace AIS
 {
     public static class Extensions
     {

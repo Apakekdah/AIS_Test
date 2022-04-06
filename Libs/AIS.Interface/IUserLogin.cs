@@ -5,6 +5,6 @@ namespace AIS.Interface
 {
     public interface IUserLogin
     {
-        AuthenticateResponse Login(AuthenticateUser authenticate, IDictionary<string, object> properties);
+        AuthenticateResponse Login(AuthenticateUser authenticate, IDictionary<string, string> properties);
     }
 }

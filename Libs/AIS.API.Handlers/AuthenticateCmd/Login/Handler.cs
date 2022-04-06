@@ -43,7 +43,7 @@ namespace AIS.API.Handlers.AuthenticateCmd.Login
                 {
                     User = command.User,
                     Password = command.Password
-                }, new Dictionary<string, object>());
+                }, new Dictionary<string, string>());
             }
         }
     }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AIS.API.Handlers\AIS.API.Handlers.csproj" />
+    <ProjectReference Include="..\AIS.JWT\AIS.JWT.csproj" />
     <ProjectReference Include="..\AIS.Mappers\AIS.Mappers.csproj" />
     <ProjectReference Include="..\Data\AIS.Data.Business\AIS.Data.Business.csproj" />
     <ProjectReference Include="..\Data\EF\AIS.Data.EF.MongoDB\AIS.Data.EF.MongoDB.csproj" />
@@ -39,6 +40,12 @@
     </Reference>
     <Reference Include="Hero.Logger">
       <HintPath>..\..\_Libs\Hero.Logger.dll</HintPath>
+    </Reference>
+    <Reference Include="Ride.Interfaces">
+      <HintPath>..\..\_Libs\Ride.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Ride.Security">
+      <HintPath>..\..\_Libs\Ride.Security.dll</HintPath>
     </Reference>
   </ItemGroup>
 

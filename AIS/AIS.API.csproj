@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Libs\AIS.Commands\AIS.Commands.csproj" />
+    <ProjectReference Include="..\Libs\AIS.Commons\AIS.Commons.csproj" />
     <ProjectReference Include="..\Libs\AIS.Model\AIS.Model.csproj" />
     <ProjectReference Include="..\Libs\AIS.Registration\AIS.Registration.csproj" />
   </ItemGroup>
