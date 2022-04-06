@@ -19,9 +19,9 @@ namespace AIS.API
             Hero.HeroSerializer.SetSerializer(Hero.Core.Serializer.TextJson.TJJson.Create(true));
             Hero.HeroSerializer.SetBinarySerializer(Hero.Core.Serializer.TextJson.TJBinary.Create());
 
-            AISLogFactory.InitLog("nlog.config");
+            RideLogFactory.InitLog("nlog.config");
 
-            Log = AISLogFactory.GetLogger<Program>();
+            Log = RideLogFactory.GetLogger<Program>();
 
             CreateHostBuilder(args).Build().Run();
         }
@@ -94,7 +94,7 @@ namespace AIS.API
                     logger.ClearProviders();
                     logger.SetMinimumLevel(LogLevel.Trace);
                 })
-                .UseAISLog();
+                .UseRideLog();
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using AIS.Commands.API;
 using AIS.Data.Business.Repositories;
+using AIS.Interface;
 using Hero;
 using Hero.IoC;
 using Ride.Handlers.Handlers;
 using Ride.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,12 +16,14 @@ namespace AIS.API.Handlers.AuthenticateCmd.Login
     {
         private readonly IDisposableIoC life;
         private readonly IMappingObject map;
+        private readonly IUserLogin login;
 
         public Handler(Config config) :
             base(config)
         {
             life = config.Life;
             map = life.GetInstance<IMappingObject>();
+            login = life.GetInstance<IUserLogin>();
         }
 
         public override async Task<Model.Models.AuthenticateResponse> Execute(AuthenticateCommand command, CancellationToken cancellation)
@@ -35,12 +39,11 @@ namespace AIS.API.Handlers.AuthenticateCmd.Login
                 else if (!userEntity.IsActive)
                     throw new Exception($"User '{command.User}' not active");
 
-                return new Model.Models.AuthenticateResponse
+                return login.Login(new Model.Models.AuthenticateUser
                 {
                     User = command.User,
-                    Create = DateTime.Now,
-                    Session = "123"
-                };
+                    Password = command.Password
+                }, new Dictionary<string, object>());
             }
         }
     }

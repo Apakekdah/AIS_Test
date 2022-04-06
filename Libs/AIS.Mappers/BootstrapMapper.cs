@@ -24,7 +24,7 @@ namespace AIS.Mappers
                 {
                     foreach (var p in c.GetInstance<IEnumerable<IMapperConfigurator>>())
                     {
-                        var rm = new RideMapper();
+                        var rm = new AISMapper();
                         p.SetMapper(rm);
                         profiles.Add(rm);
                     }
@@ -36,7 +36,7 @@ namespace AIS.Mappers
                 });
 
                 return mapConfig.CreateMapper();
-            });
+            }, ScopeIoC.Singleton);
 
             container.Register<IMappingObject, MappingObject>(ScopeIoC.Singleton);
             return Task.FromResult(0);
@@ -47,7 +47,7 @@ namespace AIS.Mappers
             return Task.FromResult(0);
         }
 
-        internal class RideMapper : Profile
+        internal class AISMapper : Profile
         {
 
         }
