@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Hero.Core.Interfaces;
+using Hero.IoC;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -9,9 +11,12 @@ namespace AIS.Registration.MW
     {
         private readonly RequestDelegate _next;
 
+        protected ILogger Log { get; private set; }
+
         public ErrorHandlerMiddleware(RequestDelegate next)
         {
             _next = next;
+            Log = GlobalIoC.Life.GetLogger(this.GetType());
         }
 
         public async Task Invoke(HttpContext context)
@@ -22,6 +27,8 @@ namespace AIS.Registration.MW
             }
             catch (Exception ex)
             {
+                Log?.Error("Error while invoke next delegate", ex);
+
                 var response = context.Response;
                 response.ContentType = "application/json";
 
